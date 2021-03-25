@@ -74,6 +74,11 @@ var ts = tmpSysFs{
 // CreateTmpSysFs create mock sysfs for testing
 func CreateTmpSysFs() error {
 	originalRoot, err := os.Open("/")
+
+	if err != nil {
+		return err
+	}
+
 	ts.originalRoot = originalRoot
 
 	tmpdir, err := ioutil.TempDir("/tmp", "sriovplugin-testfiles-")
@@ -90,8 +95,7 @@ func CreateTmpSysFs() error {
 		}
 	}
 	for filename, body := range ts.fileList {
-
-		if err := ioutil.WriteFile(filepath.Join(ts.dirRoot, filename), body, 0644); err != nil {
+		if err := ioutil.WriteFile(filepath.Join(ts.dirRoot, filename), body, 0600); err != nil {
 			return err
 		}
 	}

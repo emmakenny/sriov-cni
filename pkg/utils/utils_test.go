@@ -6,7 +6,6 @@ import (
 )
 
 var _ = Describe("Utils", func() {
-
 	Context("Checking GetSriovNumVfs function", func() {
 		It("Assuming existing interface", func() {
 			result, err := GetSriovNumVfs("enp175s0f1")
